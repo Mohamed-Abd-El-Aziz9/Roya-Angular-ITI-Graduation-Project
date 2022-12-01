@@ -18,10 +18,10 @@ export class HomeComponent implements OnInit {
     setTimeout(() => {
       /** spinner ends after 5 seconds */
       this.spinner.hide();
-    }, 5000);
-  
+    }, 3000);
+
   }
-  term : string = "" ; 
+  term : string = "" ;
   productList: any[] = [];
   Comments: any[] = [];
   images: any[] = [];
@@ -31,8 +31,8 @@ export class HomeComponent implements OnInit {
       this.Comments = data.data.comments;
       this.images = data.data.images;
       console.log(this.productList);
-      console.log(this.images); 
-      
+      console.log(this.images);
+
     })
   }
 }

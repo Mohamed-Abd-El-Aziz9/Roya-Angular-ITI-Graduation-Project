@@ -8,12 +8,7 @@ import { environment } from './environments/environment';
 if (environment.production) {
   enableProdMode();
 }
-//dfasfdsa eesa
-//tesst 123141243
-//ahmed
-//i am ahmef
-//teststastst
-//faffafaffaa
+
 
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
