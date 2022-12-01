@@ -19,6 +19,10 @@ export class RegisterComponent implements OnInit {
     'Password': new FormControl(null),
     'role' : new FormControl(null)
   })
+
+  Abdelaziz() {
+    alert('hello');
+  }
   SubmitData() {
 
     if (this.registerForm.invalid) {
