@@ -14,6 +14,5 @@ if (environment.production) {
 //i am ahmef
 //teststastst
 //faffafaffaa
-// abdelaziz
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
