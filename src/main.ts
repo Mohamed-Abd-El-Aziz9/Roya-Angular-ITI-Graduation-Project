@@ -12,10 +12,8 @@ if (environment.production) {
 //tesst 123141243
 //ahmed
 //i am ahmef
-<<<<<<< HEAD
 //teststastst
-=======
 //faffafaffaa
->>>>>>> origin/main
+
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
