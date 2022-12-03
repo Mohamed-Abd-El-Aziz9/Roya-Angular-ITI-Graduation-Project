@@ -54,6 +54,7 @@ export class ProfileComponent implements OnInit {
     Type: new FormControl(null, [Validators.required]),
     Price: new FormControl(null, [Validators.required]),
     address: new FormControl(null, [Validators.required]),
+
     UserId: new FormControl(null, [Validators.required]),
     ImagesFile: new FormControl(null, [Validators.required]),
 
@@ -83,6 +84,7 @@ export class ProfileComponent implements OnInit {
    // get id to make update and delete
    productIdBeforDeleted: any;
    Productdetailes: any;
+
    nameOFProductYouWillDelete:any;
    getId(id: any,nameOFProductYouWillDelete:any) {
  this.nameOFProductYouWillDelete = nameOFProductYouWillDelete;
@@ -114,6 +116,7 @@ export class ProfileComponent implements OnInit {
      );
      this.addHotelForm.controls.address.setValue(this.Productdetailes?.address);
 
+
    }
 
   // submit your data
@@ -134,6 +137,10 @@ export class ProfileComponent implements OnInit {
         "Type",
         this.addHotelForm.controls["Type"].value
       );
+      formData.append(
+        "Type",
+        this.addHotelForm.controls["Type"].value
+      );
       formData.append("Price", this.addHotelForm.controls["Price"].value);
       formData.append("address", this.addHotelForm.controls["address"].value);
       formData.append("UserId", this.userId);
@@ -146,7 +153,9 @@ export class ProfileComponent implements OnInit {
             this.addHotelForm.reset();
             this.maultimages = null
             this._ToastrService.success('تم تعديل المنتج بنجاح');
+
             this.getData();
+
        });
         } else{
           this._MainServeicesService.AddProduct(formData).subscribe((res) => {
