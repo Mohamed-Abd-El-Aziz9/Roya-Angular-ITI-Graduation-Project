@@ -199,8 +199,9 @@ this.getData();
     this._MainServeicesService.DeleteFavouritList(id).subscribe(()=> {
 
     })
-    this._ToastrService.success("تم حذف العقار بنجاح");
 
+    this._ToastrService.success("تم حذف العقار بنجاح");
+    this.favourtList();
 
 
   }
@@ -209,7 +210,7 @@ this.getData();
 
     })
     this._ToastrService.success("تم حذف العقار بنجاح");
-
+this.Booking();
 
 
   }

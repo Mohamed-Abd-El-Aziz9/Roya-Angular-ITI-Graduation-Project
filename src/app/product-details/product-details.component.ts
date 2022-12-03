@@ -37,7 +37,10 @@ export class ProductDetailsComponent implements OnInit {
 
 
      });
-     this._ToastrService.success("تمت اضافه العقار الى المفضله");
+
+
+
+      this._ToastrService.success("تمت اضافه العقار الى المفضله");
   }
   AddProductToBooking() {
     let formData = new FormData();

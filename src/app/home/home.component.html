@@ -179,8 +179,9 @@
         class="form-control my-3 w-100 bg-white text-black"
         placeholder="ابحث عن عقار"
       />
+
       <div *ngFor="let product of productList | search : term" class="col-md-4">
-        <ng-container *ngIf="product.aprove != false">
+        <ng-container *ngIf="product.aprove == true">
           <div>
             <div
               id="carouselExampleIndicators"
