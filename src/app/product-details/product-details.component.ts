@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { MainServeicesService } from '../main-serveices.service';
 
 @Component({
@@ -13,7 +14,7 @@ export class ProductDetailsComponent implements OnInit {
   userId: any = localStorage.getItem("UserID");
   userName: any = localStorage.getItem("Name");
 
-  constructor(private _MainServeicesService: MainServeicesService, private _ActivatedRoute: ActivatedRoute) {
+  constructor(private _MainServeicesService: MainServeicesService, private _ActivatedRoute: ActivatedRoute,private _ToastrService :ToastrService) {
     this.currentId = this._ActivatedRoute.snapshot.params.id;
   }
   GetProductByID() {
@@ -30,11 +31,13 @@ export class ProductDetailsComponent implements OnInit {
       userId: this.userId,
       productId: this.ProductDetails.id
     }
-    console.log(this.userId);
+
     this._MainServeicesService.AddProductToFavoritList(Object).subscribe((data) => {
-      console.log(data); 
- 
+      console.log(data);
+
+
      });
+     this._ToastrService.success("تمت اضافه العقار الى المفضله");
   }
   AddProductToBooking() {
     let formData = new FormData();
@@ -46,10 +49,11 @@ export class ProductDetailsComponent implements OnInit {
     formData.append("Image" , this.ProductDetails?.images[0] );
 
     this._MainServeicesService.AddProductToBooking(formData).subscribe((data) => {
-     console.log(data); 
+     console.log(data);
+
 
     });
-    console.log(formData); 
+    this._ToastrService.success('تم حجز المنتج بنجاح');
   }
 
 

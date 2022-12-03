@@ -80,6 +80,42 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+   // get id to make update and delete
+   productIdBeforDeleted: any;
+   Productdetailes: any;
+   nameOFProductYouWillDelete:any;
+   getId(id: any,nameOFProductYouWillDelete:any) {
+ this.nameOFProductYouWillDelete = nameOFProductYouWillDelete;
+
+     this.productIdBeforDeleted = id;
+     // get hotel data
+     this._MainServeicesService
+       .GetProductById(this.productIdBeforDeleted)
+       .subscribe((res) => {
+         this.Productdetailes = res;
+         this.setValueInInputUpdate();
+       });
+
+   }
+   //update model sit value in inputs
+   setValueInInputUpdate() {
+     // set data in input model update
+     this.addHotelForm.controls.Name.setValue(
+       this.Productdetailes?.name
+     );
+     this.addHotelForm.controls.Description.setValue(
+       this.Productdetailes?.description
+     );
+     this.addHotelForm.controls.Type.setValue(
+       this.Productdetailes?.type
+     );
+         this.addHotelForm.controls.Price.setValue(
+       this.Productdetailes?.price
+     );
+     this.addHotelForm.controls.address.setValue(this.Productdetailes?.address);
+
+   }
+
   // submit your data
 
   handelSubmit(e: any) {
@@ -104,13 +140,23 @@ export class ProfileComponent implements OnInit {
       for (let img of this.maultimages)
 
         formData.append("ImagesFile", img);
+        if(this.productIdBeforDeleted >0)
+        {
+          this._MainServeicesService.updateProduct(formData,this.productIdBeforDeleted).subscribe((res) => {
+            this.addHotelForm.reset();
+            this.maultimages = null
+            this._ToastrService.success('تم تعديل المنتج بنجاح');
+            this.getData();
+       });
+        } else{
+          this._MainServeicesService.AddProduct(formData).subscribe((res) => {
+            this.addHotelForm.reset();
+            this.maultimages = null
+            this._ToastrService.success('تم أضافه المنتج بنجاح');
+this.getData();
+       });
+        }
 
-      this._MainServeicesService.AddProduct(formData).subscribe((res) => {
-        this.addHotelForm.reset();
-        this.maultimages = null
-        this._ToastrService.success('تم اضافه المنتج بنجاح');
-        
-   });
     }
   }
   profileData: any = {};
@@ -129,9 +175,7 @@ export class ProfileComponent implements OnInit {
         this.UserBooking = data.bookings;
         this.UserFavourotList = data.favoritLists;
         console.log(this.profileData);
-     /*    console.log(this.UserProducts);
-        console.log(this.UserBooking);
-        console.log(this.UserFavourotList); */
+
         if (this.role == 'Client') {
           this.roleSatus = false;
         }
@@ -146,11 +190,39 @@ export class ProfileComponent implements OnInit {
     this._MainServeicesService.DeleteFavouritList(id).subscribe(()=> {
 
     })
+    this._ToastrService.success("تم حذف العقار بنجاح");
 
- 
+
+
   }
+   DeleteBooking(id : any) {
+    this._MainServeicesService.deleteBook(id).subscribe(()=> {
+
+    })
+    this._ToastrService.success("تم حذف العقار بنجاح");
+
+
+
+  }
+
   ViewProduct(product: any) {
     this._MainServeicesService.ViewProduct(product);
   }
+  deleteProduct(id: any) {
+    this._MainServeicesService.deleteProduct(id).subscribe(
+      (res) => {
 
+
+      },
+      (err) => {},
+      () => {}
+      );
+      this._ToastrService.success("تم الحذف العقار بنجاح");
+
+this.getData();
+
+  }
 }
+
+
+

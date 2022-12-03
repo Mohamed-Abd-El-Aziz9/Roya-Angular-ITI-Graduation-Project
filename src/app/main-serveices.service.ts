@@ -11,7 +11,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 export class MainServeicesService {
 
-  
+
   baseUrl: string = "http://royaiti-001-site1.gtempurl.com";
   //baseUrl: string = "https://localhost:7272";
   constructor(private _HttpClient: HttpClient, private _Router: Router) {
@@ -69,6 +69,16 @@ export class MainServeicesService {
 
   DeleteFavouritList(body : any): Observable<any> {
     return this._HttpClient.delete(`${this.baseUrl}/api/FavouriteList?id=${body}`);
+  }
+
+  deleteBook(id: any): Observable<any> {
+    return this._HttpClient.delete(`${this.baseUrl}/api/Booking/${id}`);
+  }
+  updateProduct(body: any,id:number): Observable<any> {
+    return this._HttpClient.put(`${this.baseUrl}/api/Product/${id}`, body);
+  }
+  deleteProduct(id: any): Observable<any> {
+    return this._HttpClient.delete(`${this.baseUrl}/api/Product/${id}`);
   }
 
 
